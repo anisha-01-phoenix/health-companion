@@ -28,14 +28,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email id/ UserName: "
+            android:text="Email id: "
             android:textColor="@color/black"
             android:textSize="25dp" />
 
         <EditText
+            android:id="@+id/txt_Email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Input Email id/ UserName"/>
+            android:hint="Input Email id"
+            android:textColor="@color/purple_700"/>
 
     </LinearLayout>
 
@@ -53,16 +55,20 @@
             android:textColor="@color/black"
             android:textSize="25dp" />
 
+
         <EditText
+            android:id="@+id/txt_Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Input Password"/>
+            android:hint="Input Password"
+            android:textColor="@color/purple_700"/>
 
     </LinearLayout>
 
 
 
         <Button
+            android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="LOGIN "
