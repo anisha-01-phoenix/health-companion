@@ -17,6 +17,7 @@
         android:textSize="42dp"
         android:textColor="@color/black"
         android:layout_marginTop="32dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:padding="8dp">
 
         <TextView
@@ -44,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Input Name"
-            android:textColor="@color/purple_700"/>
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 
@@ -67,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Input Email id"
-            android:textColor="@color/purple_700"/>
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 
@@ -91,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Input Password"
-            android:textColor="@color/purple_700"/>
+            android:textColor="@color/black"/>
 
     </LinearLayout>
     <LinearLayout
@@ -112,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Confirm Password"
-            android:textColor="@color/purple_700"/>
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 
@@ -122,11 +123,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#f6d365"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#b721ff"
         android:padding="8dp"
         android:text="SIGN UP"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:textColor="@color/white"/>
 
 
 </LinearLayout>

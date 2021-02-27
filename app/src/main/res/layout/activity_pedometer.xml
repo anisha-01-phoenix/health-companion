@@ -7,15 +7,15 @@
     tools:context=".MainActivity"
     tools:ignore="MissingClass"
     android:orientation="vertical"
-    android:background="@drawable/gradient_background">
+    android:background="@drawable/gradient_background_pedometer">
 
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="WELCOME TO YOUR HEALTHPAL"
+        android:layout_gravity="center"
+        android:text="PEDOMETER"
         android:textSize="42dp"
         android:textColor="@color/black"
         android:textStyle="bold"
@@ -31,8 +31,7 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="314dp"
-        android:src="@drawable/health"
-
+        android:src="@drawable/pedometer"
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
         android:scaleType="centerCrop"/>
@@ -41,29 +40,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="32dp">
-
-        <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:text="LOGIN"
-        android:textSize="32dp"
         android:layout_margin="32dp"
-        android:backgroundTint="#b721ff"
-        android:textColor="@color/white"/>
+        android:layout_gravity="center">
 
-        <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:text="SIGNUP"
-        android:textSize="32dp"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#b721ff"
-        android:textColor="@color/white"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STEPS COUNT: "
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="16dp"/>
+
+        <TextView
+            android:id="@+id/steps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="45sp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"/>
+
 
     </LinearLayout>
+
+
+    <Button
+        android:id="@+id/record"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_margin="32dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/teal_200"
+        android:textColor="@color/black"
+        android:text="Daily Record"
+        android:textStyle="bold"
+        android:textSize="32dp" />
 
 
 </LinearLayout>

@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Input Email id"
-            android:textColor="@color/purple_700"/>
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 
@@ -61,9 +61,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Input Password"
-            android:textColor="@color/purple_700"/>
+            android:textColor="@color/black"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password?"
+        android:textSize="20sp"
+        android:textColor="@color/purple_700"
+        android:layout_marginLeft="10dp"/>
 
 
 
@@ -76,7 +85,8 @@
             android:padding="8dp"
             android:layout_marginTop="16dp"
             android:layout_gravity="center"
-            android:backgroundTint="#f6d365"/>
+            android:backgroundTint="#b721ff"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/button"
@@ -87,7 +97,8 @@
             android:padding="8dp"
             android:layout_marginTop="16dp"
             android:layout_gravity="center"
-            android:backgroundTint="#f6d365"/>
+            android:backgroundTint="#b721ff"
+            android:textColor="@color/white"/>
 
 
 

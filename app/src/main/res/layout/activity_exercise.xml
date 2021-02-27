@@ -7,15 +7,15 @@
     tools:context=".MainActivity"
     tools:ignore="MissingClass"
     android:orientation="vertical"
-    android:background="@drawable/gradient_background">
+    android:background="@drawable/gradient_background_exercise">
 
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="WELCOME TO YOUR HEALTHPAL"
+        android:layout_gravity="center"
+        android:text="EXERCISE"
         android:textSize="42dp"
         android:textColor="@color/black"
         android:textStyle="bold"
@@ -31,39 +31,46 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="314dp"
-        android:src="@drawable/health"
-
+        android:src="@drawable/exercise"
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
         android:scaleType="centerCrop"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="32dp">
+        android:text="TODAY'S EXERCISE TIME: "
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:layout_margin="16dp"/>
 
-        <Button
-        android:id="@+id/button1"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_gravity="center"
+        android:textSize="50dp"
+        android:textColor="@color/white"
+        android:layout_marginLeft="10dp"/>
+
+
+
+
+
+    <Button
+        android:id="@+id/record"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
-        android:text="LOGIN"
-        android:textSize="32dp"
         android:layout_margin="32dp"
-        android:backgroundTint="#b721ff"
-        android:textColor="@color/white"/>
-
-        <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:text="SIGNUP"
-        android:textSize="32dp"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#b721ff"
-        android:textColor="@color/white"/>
-
-    </LinearLayout>
+        android:layout_gravity="center"
+        android:backgroundTint="#ffb199"
+        android:textColor="@color/black"
+        android:text="Daily Record"
+        android:textStyle="bold"
+        android:textSize="32dp" />
 
 
 </LinearLayout>

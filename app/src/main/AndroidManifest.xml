@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthPal">
-        <activity android:name=".Dashboard"></activity>
+        <activity android:name=".Exercise"></activity>
+        <activity android:name=".Water" />
+        <activity android:name=".sleeping" />
+        <activity android:name=".Pedometer" />
+        <activity android:name=".Forgot_Password" />
+        <activity android:name=".Dashboard" />
         <activity android:name=".Activity1" />
         <activity android:name=".Activity2" />
         <activity android:name=".MainActivity">
