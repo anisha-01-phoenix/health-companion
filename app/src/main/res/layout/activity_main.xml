@@ -32,7 +32,6 @@
         android:layout_width="300dp"
         android:layout_height="314dp"
         android:src="@drawable/health"
-
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
         android:scaleType="centerCrop"/>
