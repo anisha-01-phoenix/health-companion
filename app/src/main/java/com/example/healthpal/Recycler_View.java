@@ -24,6 +24,7 @@ public class Recycler_View extends AppCompatActivity {
 
     private ArrayList<ClipData.Item>items=new ArrayList<>();
     private int lastposition;
+    String date,steps;
         Pedometer pedometer=new Pedometer();
 
     @Override
@@ -44,11 +45,12 @@ public class Recycler_View extends AppCompatActivity {
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 lastposition=layoutManager.findFirstVisibleItemPosition();
-
+        date=sharedPreferences.getString("Date",pedometer.Date);
+        steps=sharedPreferences.getString("Steps",pedometer.today_steps);
             }
         });
-        items.add(new ClipData.Item(pedometer.Date));
-        items.add(new ClipData.Item(pedometer.today_steps));
+        items.add(new ClipData.Item(date));
+        items.add(new ClipData.Item(steps));
 
 
 

@@ -84,7 +84,7 @@ public class Pedometer extends AppCompatActivity implements SensorEventListener 
         pedo_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Pedometer.this,ProgramAdapter.class);
+                Intent intent=new Intent(Pedometer.this,Recycler_View.class);
                 startActivity(intent);
 
             }
@@ -126,6 +126,7 @@ public class Pedometer extends AppCompatActivity implements SensorEventListener 
 
             if (event.sensor == stepCounter) {
                 stepCount = (int) event.values[0];
+                steps.setText(String.valueOf(stepCount));
 
             } else if (event.sensor == stepDetector) {
                 stepDetect = (int) (stepDetect + event.values[0]);
