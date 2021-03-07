@@ -2,9 +2,7 @@ package com.example.healthpal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -79,7 +77,7 @@ public class Dashboard extends AppCompatActivity {
         startActivity(intent);
     }
     public void openActivity2(){
-        Intent intent=new Intent(this,Activity2.class);
+        Intent intent=new Intent(this, Login.class);
         startActivity(intent);
     }
     public void openMainActivity(){

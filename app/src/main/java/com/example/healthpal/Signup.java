@@ -16,13 +16,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Activity1 extends AppCompatActivity {
+public class Signup extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_1);
+        setContentView(R.layout.activity_signup);
 
         EditText txtName= findViewById(R.id.txt_name);
 
@@ -42,43 +42,43 @@ public class Activity1 extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(name))
                 {
-                    Toast.makeText(Activity1.this,"Enter Name",Toast.LENGTH_SHORT) .show();
+                    Toast.makeText(Signup.this,"Enter Name",Toast.LENGTH_SHORT) .show();
                     return;
                 }
                 if (TextUtils.isEmpty(email))
                 {
-                    Toast.makeText(Activity1.this,"Enter Email id",Toast.LENGTH_SHORT) .show();
+                    Toast.makeText(Signup.this,"Enter Email id",Toast.LENGTH_SHORT) .show();
                     return;
                 }
                 if (TextUtils.isEmpty(password))
                 {
-                    Toast.makeText(Activity1.this,"Enter Password",Toast.LENGTH_SHORT) .show();
+                    Toast.makeText(Signup.this,"Enter Password",Toast.LENGTH_SHORT) .show();
                     return;
                 }
                 if (TextUtils.isEmpty(ConfirmPassword))
                 {
-                    Toast.makeText(Activity1.this,"Confirm Password",Toast.LENGTH_SHORT) .show();
+                    Toast.makeText(Signup.this,"Confirm Password",Toast.LENGTH_SHORT) .show();
                     return;
                 }
                 if(password.length()<8)
                 {
-                    Toast.makeText(Activity1.this,"Password must contain atleast 8 characters",Toast.LENGTH_SHORT) .show();
+                    Toast.makeText(Signup.this,"Password must contain atleast 8 characters",Toast.LENGTH_SHORT) .show();
                     return;
                 }
                 if(password.equals(ConfirmPassword))
                 {
                     firebaseAuth.createUserWithEmailAndPassword(email,password)
-                            .addOnCompleteListener(Activity1.this, new OnCompleteListener<AuthResult>() {
+                            .addOnCompleteListener(Signup.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful())
                                     {
                                         startActivity(new Intent(getApplicationContext(), Dashboard.class));
-                                        Toast.makeText(Activity1.this,"Welcome to Healthpal!",Toast.LENGTH_SHORT) .show();
+                                        Toast.makeText(Signup.this,"Welcome to Healthpal!",Toast.LENGTH_SHORT) .show();
                                     }
                                     else
                                     {
-                                        Toast.makeText(Activity1.this, "Authentication Failed!", Toast.LENGTH_SHORT) .show();
+                                        Toast.makeText(Signup.this, "Authentication Failed!", Toast.LENGTH_SHORT) .show();
                                     }
                                 }
                             });

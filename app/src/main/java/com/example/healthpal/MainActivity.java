@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity
         });
     }
     public void openActivity2() {
-        Intent intent=new Intent(this, Activity2.class);
+        Intent intent=new Intent(this, Login.class);
         startActivity(intent);
     }
     public void openActivity1() {
-        Intent intent = new Intent(this, Activity1.class);
+        Intent intent = new Intent(this, Signup.class);
         startActivity(intent);
     }
 }

@@ -17,13 +17,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Activity2 extends AppCompatActivity {
+public class Login extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_2);
+        setContentView(R.layout.activity_login);
         TextView forgotpassword=findViewById(R.id.forgot_password);
         Button button= findViewById(R.id.button);
         EditText txtEmail=findViewById(R.id.txt_Email);
@@ -38,31 +38,31 @@ public class Activity2 extends AppCompatActivity {
                 String password=txtPassword.getText().toString().trim();
                 if(TextUtils.isEmpty(email))
                 {
-                    Toast.makeText(Activity2.this,"Enter Email id",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this,"Enter Email id",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(TextUtils.isEmpty(password))
                 {
-                    Toast.makeText(Activity2.this,"Enter Password",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this,"Enter Password",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(password.length()<8)
                 {
-                    Toast.makeText(Activity2.this,"Password must contain at least 8 characters",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this,"Password must contain at least 8 characters",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 firebaseAuth.signInWithEmailAndPassword(email,password)
-                        .addOnCompleteListener(Activity2.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful())
                                 {
                                     startActivity(new Intent(getApplicationContext(),Dashboard.class));
-                                    Toast.makeText(Activity2.this,"Successfully Logged In!",Toast.LENGTH_SHORT) .show();
+                                    Toast.makeText(Login.this,"Successfully Logged In!",Toast.LENGTH_SHORT) .show();
                                 }
                                 else
                                 {
-                                    Toast.makeText(Activity2.this, "Login Failed!", Toast.LENGTH_SHORT) .show();
+                                    Toast.makeText(Login.this, "Login Failed!", Toast.LENGTH_SHORT) .show();
                                 }
                             }
                         });
@@ -83,7 +83,7 @@ public class Activity2 extends AppCompatActivity {
         });
     }
     public void openActivity1(){
-        Intent intent=new Intent(this,Activity1.class);
+        Intent intent=new Intent(this, Signup.class);
         startActivity(intent);
     }
     public void openForgot_Password()

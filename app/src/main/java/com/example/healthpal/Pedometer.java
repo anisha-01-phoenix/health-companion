@@ -34,6 +34,7 @@ public class Pedometer extends AppCompatActivity implements SensorEventListener 
      SharedPreferences sharedPreferences;
      String today_steps,Date;
      Button pedo_button;
+    long time,startTime;
 
 
     @Override
@@ -42,7 +43,14 @@ public class Pedometer extends AppCompatActivity implements SensorEventListener 
         setContentView(R.layout.activity_pedometer);
         Calendar calendar=Calendar.getInstance();
         Date= DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        time=System.currentTimeMillis();
         steps=(TextView)findViewById(R.id.steps);
+
+        calendar.set(Calendar.HOUR_OF_DAY,0);
+        calendar.set(Calendar.MINUTE,0);
+        calendar.set(Calendar.SECOND,0);
+
+        startTime=calendar.getTimeInMillis();
         sharedPreferences=getSharedPreferences("Daily Record of Steps", Context.MODE_PRIVATE);
         pedo_button= findViewById(R.id.pedo_record);
 
@@ -114,17 +122,18 @@ public class Pedometer extends AppCompatActivity implements SensorEventListener 
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if(event.sensor==stepCounter)
-        {
-            stepCount=(int) event.values[0];
+        if(time>startTime) {
 
-        }
-        else if (event.sensor==stepDetector)
-        {
-            stepDetect=(int)(stepDetect+event.values[0]);
-            steps.setText(String.valueOf(stepDetect));
-        }
+            if (event.sensor == stepCounter) {
+                stepCount = (int) event.values[0];
 
+            } else if (event.sensor == stepDetector) {
+                stepDetect = (int) (stepDetect + event.values[0]);
+                steps.setText(String.valueOf(stepDetect));
+            }
+        }
+        else
+            steps.setText(("0"));
 
     }
 

@@ -1,5 +1,6 @@
 package com.example.healthpal;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
@@ -10,11 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramViewHolder>{
-    private String[] data;
-    public ProgramAdapter(String [] data)
-    {
-        this.data=data;
+    private ArrayList<ClipData.Item > items;
+    private Context context;
+    public ProgramAdapter(ArrayList<ClipData.Item>items, Context context){
+        this.items=items;
+        this.context=context;
     }
     @NonNull
     @Override
@@ -26,16 +30,16 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 
     @Override
     public void onBindViewHolder(@NonNull ProgramViewHolder holder, int position) {
-        String title_Date=data[position];
-        holder.date.setText(title_Date);
-        String title_Step=data[position];
-        holder.stepCount.setText(title_Step);
+        ClipData.Item item=items.get(position);
+        Pedometer obj=new Pedometer();
+        holder.date.setText(obj.Date);
+        holder.stepCount.setText(obj.today_steps);
 
     }
 
     @Override
     public int getItemCount() {
-        return data.length;
+        return items.size();
     }
 
     public class ProgramViewHolder extends RecyclerView.ViewHolder{

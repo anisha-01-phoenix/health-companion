@@ -16,8 +16,8 @@
         <activity android:name=".Pedometer" />
         <activity android:name=".Forgot_Password" />
         <activity android:name=".Dashboard" />
-        <activity android:name=".Activity1" />
-        <activity android:name=".Activity2" />
+        <activity android:name=".Signup" />
+        <activity android:name=".Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
