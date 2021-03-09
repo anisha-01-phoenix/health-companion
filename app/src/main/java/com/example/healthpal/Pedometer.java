@@ -19,6 +19,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.StepsService;
+
 import java.text.DateFormat;
 import java.util.Calendar;
 
@@ -32,9 +34,10 @@ public class Pedometer extends AppCompatActivity implements SensorEventListener 
      boolean stepCounterRun,stepDetectorRun;
      int stepCount=0, stepDetect=0;
      SharedPreferences sharedPreferences;
-     String today_steps,Date;
+     public String today_steps,Date;
      Button pedo_button;
-    long time,startTime;
+     long time,startTime;
+     int date;
 
 
     @Override
@@ -51,12 +54,12 @@ public class Pedometer extends AppCompatActivity implements SensorEventListener 
         calendar.set(Calendar.SECOND,0);
 
         startTime=calendar.getTimeInMillis();
-        sharedPreferences=getSharedPreferences("Daily Record of Steps", Context.MODE_PRIVATE);
+        sharedPreferences=getSharedPreferences("Steps_Record", Context.MODE_PRIVATE);
         pedo_button= findViewById(R.id.pedo_record);
-
+        date=Integer.parseInt(Date);
         today_steps=steps.getText().toString();
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("Date",Date);
+        editor.putInt("Date",date);
         editor.putString("Steps",today_steps);
         editor.commit();
 
@@ -134,7 +137,7 @@ public class Pedometer extends AppCompatActivity implements SensorEventListener 
             }
         }
         else
-            steps.setText(("0"));
+            steps.setText("0");
 
     }
 

@@ -12,13 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramViewHolder>{
-    private ArrayList<ClipData.Item > items;
-    private Context context;
-    public ProgramAdapter(ArrayList<ClipData.Item>items, Context context){
-        this.items=items;
-        this.context=context;
+
+    private String[] data;
+    public ProgramAdapter(String[]data){
+        this.data=data;
     }
     @NonNull
     @Override
@@ -30,16 +30,14 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 
     @Override
     public void onBindViewHolder(@NonNull ProgramViewHolder holder, int position) {
-        ClipData.Item item=items.get(position);
-        Pedometer obj=new Pedometer();
-        holder.date.setText(obj.Date);
-        holder.stepCount.setText(obj.today_steps);
-
+            String title=data[position];
+            holder.date.setText(title);
+            holder.stepCount.setText(title);
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return data.length;
     }
 
     public class ProgramViewHolder extends RecyclerView.ViewHolder{

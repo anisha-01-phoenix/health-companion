@@ -1,69 +1,43 @@
 package com.example.healthpal;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ClipData;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.view.View;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.healthpal.ProgramAdapter;
-import com.example.healthpal.R;
+import com.StepsService;
 
+import java.security.Key;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class Recycler_View extends AppCompatActivity {
 
-    private ArrayList<ClipData.Item>items=new ArrayList<>();
-    private int lastposition;
-    String date,steps;
-        Pedometer pedometer=new Pedometer();
-
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private ProgramAdapter programAdapter;
+    String[]data; ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler__view);
-        RecyclerView stepsList=(RecyclerView)findViewById(R.id.stepsList);
-        stepsList.setHasFixedSize(true);
-        stepsList.setAdapter(new ProgramAdapter(items,this));
-        LinearLayoutManager layoutManager=new LinearLayoutManager((this));
-        stepsList.setLayoutManager(new LinearLayoutManager(this));
-
-        SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getBaseContext()) ;
-        lastposition=sharedPreferences.getInt("Last Position",lastposition);
-        stepsList.scrollToPosition(lastposition);
-        stepsList.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                lastposition=layoutManager.findFirstVisibleItemPosition();
-        date=sharedPreferences.getString("Date",pedometer.Date);
-        steps=sharedPreferences.getString("Steps",pedometer.today_steps);
-            }
-        });
-        items.add(new ClipData.Item(date));
-        items.add(new ClipData.Item(steps));
-
+        recyclerView=(RecyclerView)findViewById(R.id.stepsList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+        programAdapter=new ProgramAdapter(data);
+        recyclerView.setAdapter(programAdapter);
 
 
 
     }
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-        SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        SharedPreferences.Editor e=sharedPreferences.edit();
-        e.putInt("Last Position",lastposition);
-        e.apply();
 
-    }
+
+
 }
