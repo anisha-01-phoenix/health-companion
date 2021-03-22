@@ -28,66 +28,34 @@ public class Pedometer extends AppCompatActivity implements SensorEventListener 
 
 
 
-     SensorManager sensorManager;
-     Sensor stepCounter, stepDetector;
-     TextView steps;
-     boolean stepCounterRun,stepDetectorRun;
-     int stepCount=0, stepDetect=0;
-     SharedPreferences sharedPreferences;
-     public String today_steps,Date;
-     Button pedo_button;
-     long time,startTime;
-     int date;
-
+     private SensorManager sensorManager;
+     private Sensor sensor;
+     private boolean isSensorPresent= false;
+     private TextView steps;
+     private Button pedo_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedometer);
-        Calendar calendar=Calendar.getInstance();
-        Date= DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-        time=System.currentTimeMillis();
         steps=(TextView)findViewById(R.id.steps);
+        sensorManager=(SensorManager)this.getSystemService(Context.SENSOR_SERVICE);
+        pedo_button= (Button) findViewById(R.id.pedo_record);
 
-        calendar.set(Calendar.HOUR_OF_DAY,0);
-        calendar.set(Calendar.MINUTE,0);
-        calendar.set(Calendar.SECOND,0);
-
-        startTime=calendar.getTimeInMillis();
-        sharedPreferences=getSharedPreferences("Steps_Record", Context.MODE_PRIVATE);
-        pedo_button= findViewById(R.id.pedo_record);
-        date=Integer.parseInt(Date);
-        today_steps=steps.getText().toString();
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putInt("Date",date);
-        editor.putString("Steps",today_steps);
-        editor.commit();
-
-
-        sensorManager=(SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        this.getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)!=null)
         {
-            stepCounter=sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-            stepCounterRun=true;
+            sensor=sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+            isSensorPresent=true;
         }
         else
         {
-            stepCounterRun=false;
+            isSensorPresent=false;
         }
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)!=null)
-        {
-            stepDetector=sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-            stepDetectorRun=true;
-        }
-        else
-        {
-            stepDetectorRun=false;
-        }
+
         pedo_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Pedometer.this,Recycler_View.class);
+                Intent intent=new Intent(getApplicationContext(),Recycler_View.class);
                 startActivity(intent);
 
             }
@@ -99,45 +67,24 @@ public class Pedometer extends AppCompatActivity implements SensorEventListener 
     @Override
     protected void onResume() {
         super.onResume();
-        if(stepCounterRun)
-        {
-            sensorManager.registerListener(this,stepCounter,SensorManager.SENSOR_DELAY_NORMAL);
+        if(isSensorPresent){
+            sensorManager.registerListener(this,sensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
-        if(stepDetectorRun)
-        {
-            sensorManager.registerListener(this,stepDetector,SensorManager.SENSOR_DELAY_NORMAL);
-        }
-
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(stepCounterRun)
+        if(isSensorPresent)
         {
             sensorManager.unregisterListener(this);
         }
-        if(stepDetectorRun)
-        {
-            sensorManager.unregisterListener(this);
-        }
+
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if(time>startTime) {
-
-            if (event.sensor == stepCounter) {
-                stepCount = (int) event.values[0];
-                steps.setText(String.valueOf(stepCount));
-
-            } else if (event.sensor == stepDetector) {
-                stepDetect = (int) (stepDetect + event.values[0]);
-                steps.setText(String.valueOf(stepDetect));
-            }
-        }
-        else
-            steps.setText("0");
+        steps.setText(String.valueOf(event.values[0]));
 
     }
 

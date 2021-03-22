@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.DateStepsModel;
 import com.StepsService;
 
 import java.security.Key;
@@ -22,20 +24,28 @@ public class Recycler_View extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private ProgramAdapter programAdapter;
-    String[]data; ;
+    private StepsDBHelper stepsDBHelper;
+    private ArrayList<DateStepsModel>stepCountList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler__view);
         recyclerView=(RecyclerView)findViewById(R.id.stepsList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-        programAdapter=new ProgramAdapter(data);
-        recyclerView.setAdapter(programAdapter);
+        getDataForList();
+        RAdapter rAdapter=new RAdapter(stepCountList);
+        recyclerView.setAdapter(rAdapter);
+        Intent stepsIntent= new Intent(getApplicationContext(),StepsService.class);
+        startService(stepsIntent);
 
 
 
+    }
+
+    public void getDataForList() {
+        stepsDBHelper=new StepsDBHelper(this);
+        stepCountList=stepsDBHelper.readStepsEntries();
     }
 
 

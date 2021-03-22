@@ -14,13 +14,15 @@ import android.widget.TextView;
 
 import com.example.healthpal.Pedometer;
 import com.example.healthpal.Recycler_View;
+import com.example.healthpal.StepsDBHelper;
 
 import java.util.Calendar;
 
 public class StepsService extends Service implements SensorEventListener  {
     private SensorManager sensorManager;
     private Sensor stepDetectorSensor;
-    int date= Calendar.DATE;
+    private StepsDBHelper stepsDBHelper;
+
 
 
 
@@ -32,7 +34,8 @@ public class StepsService extends Service implements SensorEventListener  {
         {
             stepDetectorSensor=sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
             sensorManager.registerListener(this,stepDetectorSensor,SensorManager.SENSOR_DELAY_NORMAL);
-          }
+            stepsDBHelper=new StepsDBHelper(this);
+        }
     }
 
     @Override
@@ -48,8 +51,7 @@ public class StepsService extends Service implements SensorEventListener  {
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-            date++;
-            sensorManager.registerListener(this,stepDetectorSensor, SensorManager.SENSOR_DELAY_NORMAL);
+            stepsDBHelper.createStepsEntry();
     }
 
     @Override

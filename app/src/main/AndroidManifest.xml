@@ -12,7 +12,7 @@
         <activity android:name=".Recycler_View"></activity>
         <activity android:name=".Exercise" />
         <activity android:name=".Water" />
-        <activity android:name=".sleeping" />
+        <activity android:name=".Sleep" />
         <activity android:name=".Pedometer" />
         <activity android:name=".Forgot_Password" />
         <activity android:name=".Dashboard" />

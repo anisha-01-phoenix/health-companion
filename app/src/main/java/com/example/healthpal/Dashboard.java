@@ -29,7 +29,7 @@ public class Dashboard extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                opensleeping();
+                openSleep();
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
@@ -64,8 +64,8 @@ public class Dashboard extends AppCompatActivity {
         Intent intent=new Intent(this,Pedometer.class);
         startActivity(intent);
     }
-    public void opensleeping(){
-        Intent intent=new Intent(this,sleeping.class);
+    public void openSleep(){
+        Intent intent=new Intent(this, Sleep.class);
         startActivity(intent);
     }
     public void openWater(){
