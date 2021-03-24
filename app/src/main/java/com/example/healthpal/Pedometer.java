@@ -31,16 +31,16 @@ public class Pedometer extends AppCompatActivity implements SensorEventListener 
      private SensorManager sensorManager;
      private Sensor sensor;
      private boolean isSensorPresent= false;
-     private TextView steps;
-     private Button pedo_button;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pedometer);
-        steps=(TextView)findViewById(R.id.steps);
+        setContentView(R.layout.activity_recycler__view);
+
         sensorManager=(SensorManager)this.getSystemService(Context.SENSOR_SERVICE);
-        pedo_button= (Button) findViewById(R.id.pedo_record);
+
 
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)!=null)
         {
@@ -52,14 +52,7 @@ public class Pedometer extends AppCompatActivity implements SensorEventListener 
             isSensorPresent=false;
         }
 
-        pedo_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),Recycler_View.class);
-                startActivity(intent);
 
-            }
-        });
     }
 
 
@@ -84,7 +77,7 @@ public class Pedometer extends AppCompatActivity implements SensorEventListener 
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        steps.setText(String.valueOf(event.values[0]));
+        String steps=String.valueOf(event.values[0]);
 
     }
 

@@ -22,7 +22,7 @@ public class RAdapter extends RecyclerView.Adapter<RAdapter.RViewholder> {
     @NonNull
     @Override
     public RViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.steps_layout,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.steps_layout, parent,false);
         return new RViewholder(view);
     }
 

@@ -3,20 +3,14 @@ package com;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
-import android.widget.TextView;
 
 
-import com.example.healthpal.Pedometer;
-import com.example.healthpal.Recycler_View;
 import com.example.healthpal.StepsDBHelper;
-
-import java.util.Calendar;
 
 public class StepsService extends Service implements SensorEventListener  {
     private SensorManager sensorManager;

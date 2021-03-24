@@ -61,7 +61,7 @@ public class Dashboard extends AppCompatActivity {
 
     }
     public void openPedometer(){
-        Intent intent=new Intent(this,Pedometer.class);
+        Intent intent=new Intent(this, Recycler_View.class);
         startActivity(intent);
     }
     public void openSleep(){
@@ -73,7 +73,7 @@ public class Dashboard extends AppCompatActivity {
         startActivity(intent);
     }
     public void openExercise(){
-        Intent intent=new Intent(this,Exercise.class);
+        Intent intent=new Intent(this,Recycler_View_Exercise.class);
         startActivity(intent);
     }
     public void openActivity2(){
