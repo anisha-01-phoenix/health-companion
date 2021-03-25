@@ -24,7 +24,7 @@ public class Recycler_View extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private StepsDBHelper stepsDBHelper;
+    private DBHelper dbHelper;
     private ArrayList<DateStepsModel>stepCountList;
 
     @Override
@@ -44,8 +44,8 @@ public class Recycler_View extends AppCompatActivity {
     }
 
     public void getDataForList() {
-        stepsDBHelper=new StepsDBHelper(this);
-        stepCountList=stepsDBHelper.readStepsEntries();
+        dbHelper=new DBHelper(this);
+        stepCountList=dbHelper.readStepsEntries();
     }
 
 

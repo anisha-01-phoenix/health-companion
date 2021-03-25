@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Recycler_View_Exercise extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private ExerciseDBHelper exerciseDBHelper;
+    private DBHelper dbHelper;
     private ArrayList<DateEHoursModel> ETimeList;
 
 
@@ -31,8 +31,8 @@ public class Recycler_View_Exercise extends AppCompatActivity {
     }
 
     public void getDataForExerciseList() {
-        exerciseDBHelper=new ExerciseDBHelper(this);
-        ETimeList=exerciseDBHelper.readEHourEntries();
+        dbHelper=new DBHelper(this);
+        ETimeList=dbHelper.readEHourEntries();
     }
 
 

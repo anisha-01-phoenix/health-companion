@@ -13,7 +13,7 @@ import java.util.TimerTask;
 
 public class Exercise extends AppCompatActivity {
 
-    private ExerciseDBHelper exerciseDBHelper;
+    private DBHelper dbHelper;
     SwitchCompat startExercise;
     double time=0.0;
     boolean isExercise=false;
@@ -38,7 +38,7 @@ public class Exercise extends AppCompatActivity {
                 }
                 else {
                     timerTask.cancel();
-                    exerciseDBHelper.createEHoursEntry();
+                    dbHelper.createEHoursEntry();
                 }
             }
         });

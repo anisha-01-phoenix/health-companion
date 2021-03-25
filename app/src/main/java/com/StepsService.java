@@ -10,12 +10,12 @@ import android.hardware.SensorManager;
 import android.os.IBinder;
 
 
-import com.example.healthpal.StepsDBHelper;
+import com.example.healthpal.DBHelper;
 
 public class StepsService extends Service implements SensorEventListener  {
     private SensorManager sensorManager;
     private Sensor stepDetectorSensor;
-    private StepsDBHelper stepsDBHelper;
+    private DBHelper stepsDBHelper;
 
 
 
@@ -28,7 +28,7 @@ public class StepsService extends Service implements SensorEventListener  {
         {
             stepDetectorSensor=sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
             sensorManager.registerListener(this,stepDetectorSensor,SensorManager.SENSOR_DELAY_NORMAL);
-            stepsDBHelper=new StepsDBHelper(this);
+            stepsDBHelper=new DBHelper(this);
         }
     }
 
