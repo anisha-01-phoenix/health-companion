@@ -18,13 +18,16 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="Database";
     private static final String TABLE_STEPS_SUMMARY="StepsSummary";
     private static final String TABLE_EXER_SUMMARY="ExerciseSummary";
+    private static final String TABLE_WATER_SUMMARY="WaterSummary";
     private static final String ID="id";
     private static final String STEPS_COUNT="stepscount";
     private static final String EHOURS_COUNT="ehourscount";
+    private static final String WATER_COUNT="watercount";
     private static final String CREATION_DATE="creationdate";
 
     private static final String CREATE_TABLE_STEPS_SUMMARY = "CREATE TABLE "  + TABLE_STEPS_SUMMARY+ "("+ID+ "INTEGER PRIMARY KEY AUTOINCREMENT,"+ CREATION_DATE+ "TEXT,"+ STEPS_COUNT+"INTEGER"+")";
     private static final String CREATE_TABLE_EXER_SUMMARY = "CREATE TABLE "  + TABLE_EXER_SUMMARY+ "("+ID+ "INTEGER PRIMARY KEY AUTOINCREMENT,"+ CREATION_DATE+ "TEXT,"+ EHOURS_COUNT+"INTEGER"+")";
+    private static final String CREATE_TABLE_WATER_SUMMARY = "CREATE TABLE "  + TABLE_WATER_SUMMARY+ "("+ID+ "INTEGER PRIMARY KEY AUTOINCREMENT,"+ CREATION_DATE+ "TEXT,"+ WATER_COUNT+"INTEGER"+")";
 
 
 
@@ -39,6 +42,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_STEPS_SUMMARY);
         db.execSQL(CREATE_TABLE_EXER_SUMMARY);
+        db.execSQL(CREATE_TABLE_WATER_SUMMARY);
     }
     public boolean createStepsEntry()
     {
@@ -144,6 +148,59 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return  createSuccessful;
     }
+    public boolean createWaterList()
+    {
+        boolean isDateAlreadyPresent = false;
+        boolean createSuccessful = false;
+        int currentDateWaterCounts = 0;
+        Calendar calendar = Calendar.getInstance();
+        String todayDate = String.valueOf(calendar.get(Calendar.MONTH))+"/" + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.YEAR));
+        String selectQuery = "SELECT " + WATER_COUNT + " FROM " + TABLE_WATER_SUMMARY + " WHERE " + CREATION_DATE +" = '"+ todayDate+"'";
+        try {
+            SQLiteDatabase db=this.getReadableDatabase();
+            Cursor c=db.rawQuery(selectQuery,null);
+            if(c.moveToFirst())
+            {
+                do {
+                    isDateAlreadyPresent=true;
+                    currentDateWaterCounts=c.getInt((c.getColumnIndex(WATER_COUNT)));
+                }
+                while (c.moveToNext());
+            }
+            db.close();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        try {
+            SQLiteDatabase db=this.getWritableDatabase() ;
+            ContentValues values=new ContentValues();
+            values.put(CREATION_DATE, todayDate);
+            if(isDateAlreadyPresent)
+            {
+                values.put(WATER_COUNT, ++currentDateWaterCounts);
+                int row=db.update(TABLE_WATER_SUMMARY,values,CREATION_DATE+" = '"+ todayDate+",",null);
+                if(row==1)
+                {
+                    createSuccessful=true;
+                }
+                db.close();
+            }
+            else {
+                values.put(WATER_COUNT,1);
+                long row=db.insert(TABLE_WATER_SUMMARY,null,values);
+                if(row!=-1)
+                {
+                    createSuccessful=true;
+                }
+                db.close();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  createSuccessful;
+    }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -190,6 +247,26 @@ public class DBHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         return ETimeList;
+    }
+    public ArrayList<DateWaterModel> readWaterEntries() {
+        ArrayList<DateWaterModel>waterCountList=new ArrayList<DateWaterModel>();
+        String selectQuery="SELECT * FROM " + TABLE_WATER_SUMMARY;
+        try {
+            SQLiteDatabase db=this.getReadableDatabase();
+            Cursor c=db.rawQuery(selectQuery,null);
+            if(c.moveToFirst()){
+                do {
+                    DateWaterModel dateWaterModel=new DateWaterModel();
+                    dateWaterModel.date=c.getString(Integer.parseInt((c.getString(c.getColumnIndex(CREATION_DATE)))));
+                    dateWaterModel.waterCount=c.getInt((c.getColumnIndex(WATER_COUNT)));
+                    waterCountList.add(dateWaterModel);
+                }while (c.moveToNext());
+            }
+            db.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return waterCountList;
     }
 }
 
