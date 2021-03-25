@@ -28,11 +28,6 @@ public class Recycler_View_Exercise extends AppCompatActivity {
         getDataForExerciseList();
         REAdapter reAdapter=new REAdapter(ETimeList);
         recyclerView.setAdapter(reAdapter);
-        Intent stepsIntent= new Intent(getApplicationContext(), StepsService.class);
-        startService(stepsIntent);
-
-
-
     }
 
     public void getDataForExerciseList() {

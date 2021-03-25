@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthPal">
-        <activity android:name=".Recycler_View_Exercise"></activity>
+        <activity android:name=".WaterSchedule"></activity>
+        <activity android:name=".Recycler_view_water" />
+        <activity android:name=".Recycler_View_Exercise" />
         <activity android:name=".Recycler_View" />
         <activity android:name=".Exercise" />
         <activity android:name=".Water" />

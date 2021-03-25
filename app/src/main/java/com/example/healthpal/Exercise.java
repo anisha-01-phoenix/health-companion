@@ -38,10 +38,11 @@ public class Exercise extends AppCompatActivity {
                 }
                 else {
                     timerTask.cancel();
+                    exerciseDBHelper.createEHoursEntry();
                 }
             }
         });
-        exerciseDBHelper.createEHoursEntry();
+
         timer.scheduleAtFixedRate(timerTask,0,1000);
         
     }

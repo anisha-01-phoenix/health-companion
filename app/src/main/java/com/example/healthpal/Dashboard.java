@@ -69,7 +69,7 @@ public class Dashboard extends AppCompatActivity {
         startActivity(intent);
     }
     public void openWater(){
-        Intent intent=new Intent(this,Water.class);
+        Intent intent=new Intent(this,Recycler_view_water.class);
         startActivity(intent);
     }
     public void openExercise(){
