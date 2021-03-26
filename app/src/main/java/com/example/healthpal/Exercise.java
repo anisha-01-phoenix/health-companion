@@ -13,7 +13,7 @@ import java.util.TimerTask;
 
 public class Exercise extends AppCompatActivity {
 
-    private DBHelper dbHelper;
+    DBHelper dbHelper;
     SwitchCompat startExercise;
     double time=0.0;
     boolean isExercise=false;
