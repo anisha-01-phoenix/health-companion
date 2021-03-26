@@ -19,6 +19,7 @@ public class Exercise extends AppCompatActivity {
     boolean isExercise=false;
     Timer timer;
     TimerTask timerTask;
+    String time_exercise;
 
 
     @Override
@@ -43,8 +44,6 @@ public class Exercise extends AppCompatActivity {
             }
         });
 
-        timer.scheduleAtFixedRate(timerTask,0,1000);
-        
     }
 
     private void startTimer()
@@ -56,12 +55,25 @@ public class Exercise extends AppCompatActivity {
                     @Override
                     public void run() {
                         time++;
+                        time_exercise=getTime();
                     }
                 });
 
             }
         };
+        timer.scheduleAtFixedRate(timerTask,0,1000);
     }
-
+    private String getTime()
+    {
+        int rounded=(int)Math.round(time);
+        int seconds=((rounded%86400)%3600)%60;
+        int minutes=((rounded%86400)%3600)/60;
+        int hours=((rounded%86400)/3600);
+        return formatTime(seconds,minutes,hours);
+    }
+    private String formatTime(int seconds, int minutes, int hours)
+    {
+        return String.format("%02d",hours)+":"+String.format("%02d",minutes)+":"+String.format("%02d",seconds);
+    }
 
 }

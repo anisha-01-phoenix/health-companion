@@ -21,19 +21,6 @@ public class Recycler_view_water extends AppCompatActivity {
         setContentView(R.layout.activity_recycler_view_water);
         recyclerView=findViewById(R.id.waterList);
         floatingActionButton=findViewById(R.id.waterfloat);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if(dy>0)
-                {
-                    floatingActionButton.hide();
-                }
-                else{
-                    floatingActionButton.show();
-                }
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
