@@ -148,7 +148,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return  createSuccessful;
     }
-    public boolean createWaterList()
+    public boolean createWaterEntry()
     {
         boolean isDateAlreadyPresent = false;
         boolean createSuccessful = false;

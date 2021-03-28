@@ -30,7 +30,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:backgroundTint="#b721ff"
-        android:text="SET TIME"
+        android:text="SET WATER SCHEDULE"
         android:textColor="@color/white"
         android:textSize="35dp">
 
