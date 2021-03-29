@@ -1,5 +1,6 @@
 package com.example.healthpal;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,12 @@ import com.DateStepsModel;
 import java.util.ArrayList;
 
 public class REAdapter extends RecyclerView.Adapter<REAdapter.REViewholder> {
-    ArrayList<DateEHoursModel> ETimeList;
+    private Context context;
+    private ArrayList<DateEHoursModel> ETimeList;
 
-    public REAdapter(ArrayList<DateEHoursModel> dataholder) {
-        this.ETimeList = dataholder;
+    public REAdapter(Context context,ArrayList<DateEHoursModel> ETimeList) {
+        this.context=context;
+        this.ETimeList = ETimeList;
     }
 
     @NonNull
@@ -40,7 +43,7 @@ public class REAdapter extends RecyclerView.Adapter<REAdapter.REViewholder> {
         TextView ehoursCountText;
         public REViewholder(@NonNull View itemView) {
             super(itemView);
-            ehoursCountText=(TextView)itemView.findViewById(R.id.rv_dateTime);
+            ehoursCountText=itemView.findViewById(R.id.rv_dateTime);
 
         }
     }

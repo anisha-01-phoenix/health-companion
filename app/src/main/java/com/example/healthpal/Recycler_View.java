@@ -23,7 +23,6 @@ import java.util.List;
 public class Recycler_View extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     private DBHelper dbHelper;
     private ArrayList<DateStepsModel>stepCountList;
 
@@ -31,10 +30,11 @@ public class Recycler_View extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler__view);
-        recyclerView=(RecyclerView)findViewById(R.id.stepsList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView=findViewById(R.id.stepsList);
         getDataForList();
-        RAdapter rAdapter=new RAdapter(stepCountList);
+        RAdapter rAdapter=new RAdapter(this,stepCountList);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(rAdapter);
         Intent stepsIntent= new Intent(getApplicationContext(),StepsService.class);
         startService(stepsIntent);

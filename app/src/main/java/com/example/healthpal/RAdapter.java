@@ -1,5 +1,6 @@
 package com.example.healthpal;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +14,25 @@ import com.DateStepsModel;
 import java.util.ArrayList;
 
 public class RAdapter extends RecyclerView.Adapter<RAdapter.RViewholder> {
-      ArrayList<DateStepsModel> stepCountList;
+    private Context context;
+    private ArrayList<DateStepsModel> stepCountList;
 
-    public RAdapter(ArrayList<DateStepsModel> dataholder) {
-        this.stepCountList = dataholder;
+    public RAdapter(Context context, ArrayList<DateStepsModel> stepCountList) {
+        this.context=context;
+        this.stepCountList = stepCountList;
     }
 
     @NonNull
     @Override
-    public RViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RAdapter.RViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.steps_layout, parent,false);
         return new RViewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RViewholder holder, int position) {
-        holder.dateStepCountText.setText(stepCountList.get(position).date+ " - TotalSteps: "+String.valueOf(stepCountList.get(position).stepCount));
+        DateStepsModel stepsModel=stepCountList.get(position);
+        holder.dateStepCountText.setText(stepsModel.date+ " - TotalSteps: "+String.valueOf(stepsModel.stepCount));
     }
 
     @Override
@@ -40,7 +44,7 @@ public class RAdapter extends RecyclerView.Adapter<RAdapter.RViewholder> {
         TextView dateStepCountText;
         public RViewholder(@NonNull View itemView) {
             super(itemView);
-            dateStepCountText=(TextView)itemView.findViewById(R.id.rv_dateSteps);
+            dateStepCountText=itemView.findViewById(R.id.rv_dateSteps);
 
         }
     }

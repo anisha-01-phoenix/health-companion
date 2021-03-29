@@ -35,8 +35,9 @@ public class DBHelper extends SQLiteOpenHelper {
     {
         super(context, DATABASE_NAME,null,DATABASE_VERSION);
     }
-
-
+    public int currentDateStepCounts = 0;
+    public int currentDateEHoursCounts = 0;
+    public int currentDateWaterCounts=0;
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -48,7 +49,7 @@ public class DBHelper extends SQLiteOpenHelper {
     {
         boolean isDateAlreadyPresent = false;
         boolean createSuccessful = false;
-        int currentDateStepCounts = 0;
+
         Calendar calendar = Calendar.getInstance();
         String todayDate = String.valueOf(calendar.get(Calendar.MONTH))+"/" + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.YEAR));
         String selectQuery = "SELECT " + STEPS_COUNT + " FROM " + TABLE_STEPS_SUMMARY + " WHERE " + CREATION_DATE +" = '"+ todayDate+"'";
@@ -100,7 +101,7 @@ public class DBHelper extends SQLiteOpenHelper {
     {
         boolean isDateAlreadyPresent = false;
         boolean createSuccessful = false;
-        int currentDateEHoursCounts = 0;
+
         Calendar calendar = Calendar.getInstance();
         String todayDate = String.valueOf(calendar.get(Calendar.MONTH))+"/" + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.YEAR));
         String selectQuery = "SELECT " + EHOURS_COUNT + " FROM " + TABLE_EXER_SUMMARY + " WHERE " + CREATION_DATE +" = '"+ todayDate+"'";
@@ -152,7 +153,6 @@ public class DBHelper extends SQLiteOpenHelper {
     {
         boolean isDateAlreadyPresent = false;
         boolean createSuccessful = false;
-        int currentDateWaterCounts = 0;
         Calendar calendar = Calendar.getInstance();
         String todayDate = String.valueOf(calendar.get(Calendar.MONTH))+"/" + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.YEAR));
         String selectQuery = "SELECT " + WATER_COUNT + " FROM " + TABLE_WATER_SUMMARY + " WHERE " + CREATION_DATE +" = '"+ todayDate+"'";
@@ -216,7 +216,7 @@ public class DBHelper extends SQLiteOpenHelper {
             Cursor c=db.rawQuery(selectQuery,null);
             if(c.moveToFirst()){
                 do {
-                    DateStepsModel dateStepsModel=new DateStepsModel();
+                    DateStepsModel dateStepsModel=new DateStepsModel(CREATION_DATE,currentDateStepCounts);
                     dateStepsModel.date=c.getString(Integer.parseInt((c.getString(c.getColumnIndex(CREATION_DATE)))));
                     dateStepsModel.stepCount=c.getInt((c.getColumnIndex(STEPS_COUNT)));
                     stepCountList.add(dateStepsModel);
@@ -236,7 +236,7 @@ public class DBHelper extends SQLiteOpenHelper {
             Cursor c=db.rawQuery(selectQuery,null);
             if(c.moveToFirst()){
                 do {
-                    DateEHoursModel dateEHoursModel=new DateEHoursModel();
+                    DateEHoursModel dateEHoursModel=new DateEHoursModel(CREATION_DATE,currentDateEHoursCounts);
                     dateEHoursModel.date=c.getString(Integer.parseInt((c.getString(c.getColumnIndex(CREATION_DATE)))));
                     dateEHoursModel.ehoursCount=c.getInt((c.getColumnIndex(EHOURS_COUNT)));
                     ETimeList.add(dateEHoursModel);
@@ -256,7 +256,7 @@ public class DBHelper extends SQLiteOpenHelper {
             Cursor c=db.rawQuery(selectQuery,null);
             if(c.moveToFirst()){
                 do {
-                    DateWaterModel dateWaterModel=new DateWaterModel();
+                    DateWaterModel dateWaterModel=new DateWaterModel(CREATION_DATE,currentDateWaterCounts);
                     dateWaterModel.date=c.getString(Integer.parseInt((c.getString(c.getColumnIndex(CREATION_DATE)))));
                     dateWaterModel.waterCount=c.getInt((c.getColumnIndex(WATER_COUNT)));
                     waterCountList.add(dateWaterModel);

@@ -17,7 +17,6 @@ public class Recycler_view_water extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private FloatingActionButton floatingActionButton;
-    private RecyclerView.LayoutManager layoutManager;
     private DBHelper dbHelper;
     private ArrayList<DateWaterModel> waterCountList;
 
@@ -25,11 +24,12 @@ public class Recycler_view_water extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view_water);
-        floatingActionButton=(FloatingActionButton)findViewById(R.id.waterfloat);
-        recyclerView=(RecyclerView)findViewById(R.id.waterList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        floatingActionButton=findViewById(R.id.waterfloat);
+        recyclerView=findViewById(R.id.waterList);
         getDataForWaterList();
-        RWaterAdapter rwaterAdapter=new RWaterAdapter(waterCountList);
+        RWaterAdapter rwaterAdapter=new RWaterAdapter(this,waterCountList);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(rwaterAdapter);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {

@@ -14,19 +14,18 @@ import java.util.ArrayList;
 
 public class Recycler_View_Exercise extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     private DBHelper dbHelper;
-    private ArrayList<DateEHoursModel> ETimeList;
-
+    private ArrayList<DateEHoursModel>ETimeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler__view__exercise);
-        recyclerView=(RecyclerView)findViewById(R.id.etimeList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView=findViewById(R.id.etimeList);
         getDataForExerciseList();
-        REAdapter reAdapter=new REAdapter(ETimeList);
+        REAdapter reAdapter=new REAdapter(this,ETimeList);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(reAdapter);
     }
 

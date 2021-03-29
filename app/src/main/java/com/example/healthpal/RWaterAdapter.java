@@ -1,5 +1,6 @@
 package com.example.healthpal;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class RWaterAdapter extends RecyclerView.Adapter<RWaterAdapter.RWaterViewholder> {
-    ArrayList<DateWaterModel> waterCountList;
-    public RWaterAdapter(ArrayList<DateWaterModel> dataholder) {
-        this.waterCountList = dataholder;
+    private Context context;
+    private ArrayList<DateWaterModel> waterCountList;
+    public RWaterAdapter(Context context,ArrayList<DateWaterModel> waterCountList) {
+
+        this.context=context;
+        this.waterCountList = waterCountList;
     }
 
 
@@ -39,7 +43,7 @@ public class RWaterAdapter extends RecyclerView.Adapter<RWaterAdapter.RWaterView
         TextView waterCountText;
         public RWaterViewholder(@NonNull View itemView) {
             super(itemView);
-            waterCountText=(TextView)itemView.findViewById(R.id.rv_water);
+            waterCountText=itemView.findViewById(R.id.rv_water);
         }
     }
 }
