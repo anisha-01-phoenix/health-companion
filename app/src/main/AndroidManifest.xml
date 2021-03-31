@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.healthpal">
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -10,12 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthPal">
-        <activity android:name=".WaterSchedule"></activity>
+        <activity android:name=".Water"></activity>
+        <activity android:name=".WaterSchedule" />
         <activity android:name=".Recycler_view_water" />
         <activity android:name=".Recycler_View_Exercise" />
         <activity android:name=".Recycler_View" />
         <activity android:name=".Exercise" />
-        <activity android:name=".Water" />
         <activity android:name=".Sleep" />
         <activity android:name=".Pedometer" />
         <activity android:name=".Forgot_Password" />
@@ -23,24 +24,21 @@
         <activity android:name=".Signup" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity">
-            
-         
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <receiver android:name="com.allyants.notifyme.NotificationPublisher"/>
+
+        <receiver android:name="com.allyants.notifyme.NotificationPublisher" />
         <receiver android:name="com.allyants.notifyme.BootNotifyMe">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
 
-                <category android:name="android.intent.category.HOME"/>
+                <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>
