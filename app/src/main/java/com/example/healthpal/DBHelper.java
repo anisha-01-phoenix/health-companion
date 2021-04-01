@@ -21,8 +21,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TABLE_WATER_SUMMARY="WaterSummary";
     private static final String ID="id";
     private static final String STEPS_COUNT="stepscount";
-    private static final String EHOURS_COUNT="ehourscount";
-    private static final String WATER_COUNT="watercount";
+    private static String EHOURS_COUNT="ehourscount";
+    private static String WATER_COUNT="watercount";
     private static final String CREATION_DATE="creationdate";
 
     private static final String CREATE_TABLE_STEPS_SUMMARY = "CREATE TABLE "  + TABLE_STEPS_SUMMARY+ "("+ID+ "INTEGER PRIMARY KEY AUTOINCREMENT,"+ CREATION_DATE+ "TEXT,"+ STEPS_COUNT+"INTEGER"+")";
@@ -97,10 +97,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return  createSuccessful;
     }
-    public boolean createEHoursEntry()
+    public boolean createEHoursEntry(String ETime)
     {
         boolean isDateAlreadyPresent = false;
         boolean createSuccessful = false;
+        EHOURS_COUNT=ETime;
 
         Calendar calendar = Calendar.getInstance();
         String todayDate = String.valueOf(calendar.get(Calendar.MONTH))+"/" + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.YEAR));
@@ -149,10 +150,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return  createSuccessful;
     }
-    public boolean createWaterEntry()
+    public boolean createWaterEntry(int count)
     {
         boolean isDateAlreadyPresent = false;
         boolean createSuccessful = false;
+        WATER_COUNT= String.valueOf(count);
         Calendar calendar = Calendar.getInstance();
         String todayDate = String.valueOf(calendar.get(Calendar.MONTH))+"/" + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.YEAR));
         String selectQuery = "SELECT " + WATER_COUNT + " FROM " + TABLE_WATER_SUMMARY + " WHERE " + CREATION_DATE +" = '"+ todayDate+"'";

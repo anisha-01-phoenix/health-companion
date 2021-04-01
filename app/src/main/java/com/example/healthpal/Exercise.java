@@ -39,7 +39,7 @@ public class Exercise extends AppCompatActivity {
                 }
                 else {
                     timerTask.cancel();
-                    dbHelper.createEHoursEntry();
+                    dbHelper.createEHoursEntry(time_exercise);
                 }
             }
         });

@@ -17,7 +17,7 @@ public class Water extends AppCompatActivity {
         manager.cancelAll();
         if(getIntent().hasExtra("Yes")){
             count++;
-            dbHelper.createWaterEntry();
+            dbHelper.createWaterEntry(count);
         }
     }
 }
