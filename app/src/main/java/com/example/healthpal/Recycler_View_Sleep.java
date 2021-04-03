@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +20,7 @@ public class Recycler_View_Sleep extends AppCompatActivity implements AdapterVie
     private RecyclerView recyclerView;
     private DBHelper dbHelper;
     private ArrayList<DateSleepModel>sleepList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +38,7 @@ public class Recycler_View_Sleep extends AppCompatActivity implements AdapterVie
         setAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePicker timePicker=findViewById(R.id.sleepTimePicker);
-                timePicker.setVisibility(View.VISIBLE);
+                openSleepAlarm();
             }
         });
         ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.SleepHours, android.R.layout.simple_spinner_item);
@@ -46,6 +47,11 @@ public class Recycler_View_Sleep extends AppCompatActivity implements AdapterVie
         spinner.setOnItemClickListener(this);
 
 
+    }
+    private void openSleepAlarm()
+    {
+        Intent intent=new Intent(this,SleepAlarm.class);
+        startActivity(intent);
     }
 
     private void getDataForSleepList() {

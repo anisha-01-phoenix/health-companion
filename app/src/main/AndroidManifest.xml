@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.healthpal">
-
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthPal">
-        <activity android:name=".Recycler_View_Sleep"/>
+        <activity android:name=".SleepAlarm"></activity>
+        <activity android:name=".Recycler_View_Sleep" />
         <activity android:name=".Water" />
         <activity android:name=".WaterSchedule" />
         <activity android:name=".Recycler_view_water" />
@@ -31,6 +32,7 @@
         </activity>
 
         <receiver android:name=".AlarmReceiver" />
+        <receiver android:name=".BroadcastReceiver"/>
     </application>
 
 </manifest>
