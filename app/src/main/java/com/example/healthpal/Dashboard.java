@@ -65,7 +65,7 @@ public class Dashboard extends AppCompatActivity {
         startActivity(intent);
     }
     public void openSleep(){
-        Intent intent=new Intent(this, Sleep.class);
+        Intent intent=new Intent(this, Recycler_View_Sleep.class);
         startActivity(intent);
     }
     public void openWater(){

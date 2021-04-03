@@ -19,15 +19,18 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TABLE_STEPS_SUMMARY="StepsSummary";
     private static final String TABLE_EXER_SUMMARY="ExerciseSummary";
     private static final String TABLE_WATER_SUMMARY="WaterSummary";
+    private static final String TABLE_SLEEP_SUMMARY="SleepSummary";
     private static final String ID="id";
     private static final String STEPS_COUNT="stepscount";
-    private static String EHOURS_COUNT="ehourscount";
-    private static String WATER_COUNT="watercount";
+    private static       String EHOURS_COUNT="ehourscount";
+    private static       String WATER_COUNT="watercount";
     private static final String CREATION_DATE="creationdate";
+    private static       String SLEEP="sleep";
 
     private static final String CREATE_TABLE_STEPS_SUMMARY = "CREATE TABLE "  + TABLE_STEPS_SUMMARY+ "("+ID+ "INTEGER PRIMARY KEY AUTOINCREMENT,"+ CREATION_DATE+ "TEXT,"+ STEPS_COUNT+"INTEGER"+")";
     private static final String CREATE_TABLE_EXER_SUMMARY = "CREATE TABLE "  + TABLE_EXER_SUMMARY+ "("+ID+ "INTEGER PRIMARY KEY AUTOINCREMENT,"+ CREATION_DATE+ "TEXT,"+ EHOURS_COUNT+"INTEGER"+")";
     private static final String CREATE_TABLE_WATER_SUMMARY = "CREATE TABLE "  + TABLE_WATER_SUMMARY+ "("+ID+ "INTEGER PRIMARY KEY AUTOINCREMENT,"+ CREATION_DATE+ "TEXT,"+ WATER_COUNT+"INTEGER"+")";
+    private static final String CREATE_TABLE_SLEEP_SUMMARY = "CREATE TABLE "  + TABLE_SLEEP_SUMMARY+ "("+ID+ "INTEGER PRIMARY KEY AUTOINCREMENT,"+ CREATION_DATE+ "TEXT,"+ SLEEP+"TEXT"+")";
 
 
 
@@ -38,12 +41,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public int currentDateStepCounts = 0;
     public int currentDateEHoursCounts = 0;
     public int currentDateWaterCounts=0;
+    public String currentDateSleepCounts="";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_STEPS_SUMMARY);
         db.execSQL(CREATE_TABLE_EXER_SUMMARY);
         db.execSQL(CREATE_TABLE_WATER_SUMMARY);
+        db.execSQL(CREATE_TABLE_SLEEP_SUMMARY);
     }
     public boolean createStepsEntry()
     {
@@ -202,6 +207,63 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return  createSuccessful;
     }
+    public boolean createSleepEntry(int sleepNo)
+    {
+        boolean isDateAlreadyPresent = false;
+        boolean createSuccessful = false;
+        if(sleepNo>0)
+            SLEEP="Oversleep";
+        else if(sleepNo==0)
+            SLEEP="Normal Sleep";
+        else
+            SLEEP="Undersleep";
+        Calendar calendar = Calendar.getInstance();
+        String todayDate = String.valueOf(calendar.get(Calendar.MONTH))+"/" + String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.YEAR));
+        String selectQuery = "SELECT " + SLEEP + " FROM " + TABLE_WATER_SUMMARY + " WHERE " + CREATION_DATE +" = '"+ todayDate+"'";
+        try {
+            SQLiteDatabase db=this.getReadableDatabase();
+            Cursor c=db.rawQuery(selectQuery,null);
+            if(c.moveToFirst())
+            {
+                do {
+                    isDateAlreadyPresent=true;
+                    currentDateSleepCounts=c.getString((c.getColumnIndex(SLEEP)));
+                }
+                while (c.moveToNext());
+            }
+            db.close();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        try {
+            SQLiteDatabase db=this.getWritableDatabase() ;
+            ContentValues values=new ContentValues();
+            values.put(CREATION_DATE, todayDate);
+            if(isDateAlreadyPresent)
+            {
+                values.put(SLEEP, currentDateSleepCounts);
+                int row=db.update(TABLE_SLEEP_SUMMARY,values,CREATION_DATE+" = '"+ todayDate+",",null);
+                if(row==1)
+                {
+                    createSuccessful=true;
+                }
+                db.close();
+            }
+            else {
+                values.put(SLEEP,1);
+                long row=db.insert(TABLE_SLEEP_SUMMARY,null,values);
+                if(row!=-1)
+                {
+                    createSuccessful=true;
+                }
+                db.close();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  createSuccessful;
+    }
 
 
     @Override
@@ -269,6 +331,26 @@ public class DBHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         return waterCountList;
+    }
+    public ArrayList<DateSleepModel> readSleepEntries() {
+        ArrayList<DateSleepModel>sleepList=new ArrayList<DateSleepModel>();
+        String selectQuery="SELECT * FROM " + TABLE_SLEEP_SUMMARY;
+        try {
+            SQLiteDatabase db=this.getReadableDatabase();
+            Cursor c=db.rawQuery(selectQuery,null);
+            if(c.moveToFirst()){
+                do {
+                    DateSleepModel dateSleepModel=new DateSleepModel(CREATION_DATE,currentDateSleepCounts);
+                    dateSleepModel.date=c.getString(Integer.parseInt((c.getString(c.getColumnIndex(CREATION_DATE)))));
+                    dateSleepModel.sleep=c.getString((c.getColumnIndex(SLEEP)));
+                    sleepList.add(dateSleepModel);
+                }while (c.moveToNext());
+            }
+            db.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return sleepList;
     }
 }
 

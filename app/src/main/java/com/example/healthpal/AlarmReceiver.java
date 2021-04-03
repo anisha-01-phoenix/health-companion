@@ -12,7 +12,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        int notificationId=intent.getIntExtra("notificationId",0);
         Intent mainIntent=new Intent(context, WaterSchedule.class);
         PendingIntent pendingIntent=PendingIntent.getActivity(context,0,mainIntent,0);
         NotificationManager manager=(NotificationManager) context.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
@@ -28,7 +27,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         builder.setContentTitle("DRINK WATER");
         builder.setContentText("Did you drink Water?");
         builder.setSmallIcon(R.drawable.water);
-        builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.addAction(R.drawable.ic_launcher_foreground,"Yes",pendingIntent1);
         builder.addAction(R.drawable.ic_launcher_foreground,"No",pendingIntent2);
         manager.notify(1,builder.build());

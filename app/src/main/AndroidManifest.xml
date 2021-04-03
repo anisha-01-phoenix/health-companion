@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.healthpal">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -11,13 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthPal">
-        <activity android:name=".Water"/>
+        <activity android:name=".Recycler_View_Sleep"/>
+        <activity android:name=".Water" />
         <activity android:name=".WaterSchedule" />
         <activity android:name=".Recycler_view_water" />
         <activity android:name=".Recycler_View_Exercise" />
         <activity android:name=".Recycler_View" />
         <activity android:name=".Exercise" />
-        <activity android:name=".Sleep" />
         <activity android:name=".Pedometer" />
         <activity android:name=".Forgot_Password" />
         <activity android:name=".Dashboard" />
