@@ -56,12 +56,23 @@
             android:textSize="25dp" />
 
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
+        android:backgroundTint="@drawable/gradient_background">
+
         <EditText
             android:id="@+id/txt_Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Input Password"
-            android:textColor="@color/black"/>
+            android:textColor="@color/mdtp_white"
+            android:inputType="textPassword"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     </LinearLayout>
 

@@ -87,12 +87,21 @@
             android:textColor="@color/black"
             android:textSize="25dp" />
 
-        <EditText
-            android:id="@+id/txt_password"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Input Password"
-            android:textColor="@color/black"/>
+            app:passwordToggleEnabled="true"
+            android:backgroundTint="@drawable/gradient_background">
+
+            <EditText
+                android:id="@+id/txt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/mdtp_white"
+                android:inputType="textPassword"/>
+
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
     <LinearLayout
@@ -108,12 +117,21 @@
             android:textColor="@color/black"
             android:textSize="25dp" />
 
-        <EditText
-            android:id="@+id/txt_confirmpassword"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Confirm Password"
-            android:textColor="@color/black"/>
+            app:passwordToggleEnabled="true"
+            android:backgroundTint="@drawable/gradient_background">
+
+            <EditText
+                android:id="@+id/txt_confirmpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/mdtp_white"
+                android:inputType="textPassword"/>
+
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
